@@ -89,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         icon: Icon(Icons.email),
                       )),
                   TextField(
+                    obscureText: _isHidePassword,
                     controller: _passEditingController,
                     decoration: InputDecoration(
                         labelText: 'Password',
@@ -106,7 +107,6 @@ class _LoginScreenState extends State<LoginScreen> {
                               color:
                                   _isHidePassword ? Colors.grey : Colors.green,
                             ))),
-                    obscureText: true,
                   ),
                   SizedBox(
                     height: 10,
