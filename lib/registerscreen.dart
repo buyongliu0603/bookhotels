@@ -230,17 +230,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
       return;
     }
-    if (_formKey.currentState.validate()) {
-        _formKey.currentState.save();
-        print("Name $name");
-        print("Email $email");
-        print("Phone $phone");
-        print("Password $password");
-      } else {
-        setState(() {
-          _validate = true;
-        });
-      }
 
     http.post(urlRegister, body: {
       "name": name,
@@ -295,6 +284,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void _onChange(bool value) {
     setState(() {
       _isChecked = value;
+      if (_formKey.currentState.validate()) {
+        _formKey.currentState.save();
+        print("Name $name");
+        print("Email $email");
+        print("Phone $phone");
+        print("Password $password");
+      } else {
+        setState(() {
+          _validate = true;
+        });
+      }
 
       //savepref(value);
     });
