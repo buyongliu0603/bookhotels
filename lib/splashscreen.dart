@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lab2_261780/loginscreen.dart';
+import 'package:lin_261780/loginscreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,7 +17,7 @@ class _MyAppState extends State<MyApp> {
       theme: new ThemeData(
         primarySwatch: Colors.brown,
       ),
-      title: 'Material App',
+      title: 'Book Hotel',
       home: Scaffold(
           body: Container(
         child: Stack(

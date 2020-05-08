@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lab2_261780/loginscreen.dart';
+import 'package:lin_261780/loginscreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:toast/toast.dart';
 
