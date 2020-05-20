@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:toast/toast.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
+import 'profilescreen.dart';
 import 'cartscreen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -320,7 +320,7 @@ class _MainScreenState extends State<MainScreen> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
                                   Text(
-                                    hoteldata[index]['location'], 
+                                    hoteldata[index]['location'],
                                   ),
                                   Text("Description: " +
                                       hoteldata[index]['description']),
@@ -423,30 +423,68 @@ class _MainScreenState extends State<MainScreen> {
                 widget.user.name.toString().substring(0, 1).toUpperCase(),
                 style: TextStyle(fontSize: 40.0),
               ),
+              backgroundImage: NetworkImage(
+                  "http://lintatt.com/bookhotels/profileimages/${widget.user.email}.jpg?"),
             ),
+            onDetailsPressed: () => {
+              Navigator.pop(context),
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => ProfileScreen(
+                            user: widget.user,
+                          )))
+            },
           ),
           ListTile(
-            title: Text("Search Hotel"),
+              title: Text(
+                "Booking Hotel List",
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () => {
+                    Navigator.pop(context),
+                    gotoCart(),
+                  }),
+          ListTile(
+            title: Text(
+              "Purchased History",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
             trailing: Icon(Icons.arrow_forward),
           ),
           ListTile(
-            title: Text("Book List"),
-            trailing: Icon(Icons.arrow_forward),
-          ),
-          ListTile(
-            title: Text("Purchased History"),
-            trailing: Icon(Icons.arrow_forward),
-          ),
-          ListTile(
-            title: Text("User Profile"),
-            trailing: Icon(Icons.arrow_forward),
-          ),
+              title: Text(
+                "User Profile",
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () => {
+                    Navigator.pop(context),
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => ProfileScreen(
+                                  user: widget.user,
+                                )))
+                  }),
         ],
       ),
     );
   }
 
- _addtocartdialog(int index) {
+  _addtocartdialog(int index) {
+     if (widget.user.email == "unregistered") {
+      Toast.show("Please register to use this function", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      return;
+    }
     quantity = 1;
     showDialog(
         context: context,
@@ -646,5 +684,20 @@ class _MainScreenState extends State<MainScreen> {
       pr.dismiss();
     });
     pr.dismiss();
+  }
+
+  gotoCart() {
+    if (widget.user.email == "unregistered") {
+      Toast.show("Please register to use this function", context,
+          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+      return;
+    } else {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => CartScreen(
+                    user: widget.user,
+                  )));
+    }
   }
 }
